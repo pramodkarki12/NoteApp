@@ -22,15 +22,15 @@ public class NotesRepository {
         getLiveNotesData = nDao.getAllNotes();
     }
 
-    void insertNotes(NotesEntity notes) {
+    public void insertNotes(NotesEntity notes) {
         nDao.insertNotes(notes);
     }
 
-    void deleteNotes(int noteId) {
+    public void deleteNotes(int noteId) {
         nDao.deleteNotes(noteId);
     }
 
-    void deleteNotes(NotesEntity notes) {
+    public void updateNotes(NotesEntity notes) {
         nDao.updateNotes(notes);
     }
 }
