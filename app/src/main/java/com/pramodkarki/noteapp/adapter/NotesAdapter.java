@@ -15,16 +15,24 @@ import com.pramodkarki.noteapp.R;
 import com.pramodkarki.noteapp.activity.UpdateNotesActivity;
 import com.pramodkarki.noteapp.model.NotesEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.notesViewHolder> {
 
     MainActivity mainActivity;
     List<NotesEntity> notes;
+    List<NotesEntity> allNotesItem;
 
     public NotesAdapter(MainActivity mainActivity, List<NotesEntity> notes) {
         this.mainActivity = mainActivity;
         this.notes = notes;
+        this.allNotesItem = new ArrayList<>(notes);
+    }
+
+    public void searchNote(List<NotesEntity> filterNames) {
+        this.notes = filterNames;
+        notifyDataSetChanged();
     }
 
     @Override

@@ -5,9 +5,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,6 +22,7 @@ import com.pramodkarki.noteapp.adapter.NotesAdapter;
 import com.pramodkarki.noteapp.model.NotesEntity;
 import com.pramodkarki.noteapp.viewModel.NotesViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     NotesAdapter adapter;
 
     TextView noFilter, highToLowFilter, lowToHighFilter;
+    List<NotesEntity> filterNotesAllItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<NotesEntity> notes) {
                 setAdapter(notes);
+                filterNotesAllItem = notes;
             }
         });
     }
@@ -86,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(List<NotesEntity> notes) {
                     setAdapter(notes);
+                    filterNotesAllItem = notes;
                 }
             });
         } else if (i == 1) {
@@ -93,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(List<NotesEntity> notes) {
                     setAdapter(notes);
+                    filterNotesAllItem = notes;
                 }
             });
         } else if (i == 2) {
@@ -100,16 +111,52 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(List<NotesEntity> notes) {
                     setAdapter(notes);
+                    filterNotesAllItem = notes;
                 }
             });
         }
-
-
     }
 
     public void setAdapter(List<NotesEntity> notes) {
-        notesRecycleView.setLayoutManager(new GridLayoutManager(this, 2));
+        notesRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         adapter = new NotesAdapter(MainActivity.this, notes);
         notesRecycleView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_notes, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.app_bar_search);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search Notes... ");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                notesFilter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void notesFilter(String newText) {
+        ArrayList<NotesEntity> filterNames = new ArrayList<>();
+
+        for (NotesEntity notes : this.filterNotesAllItem) {
+            if (notes.notesTitle.contains(newText) || notes.notesSubTitle.contains(newText)) {
+                filterNames.add(notes);
+            }
+        }
+        this.adapter.searchNote(filterNames);
+
+        Log.e("@@@@", "Notes Filter " + newText);
     }
 }
