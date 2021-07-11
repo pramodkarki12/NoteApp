@@ -1,13 +1,21 @@
 package com.pramodkarki.noteapp.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.pramodkarki.noteapp.R;
 import com.pramodkarki.noteapp.databinding.ActivityUpdateNotesBinding;
 import com.pramodkarki.noteapp.model.NotesEntity;
@@ -99,5 +107,38 @@ public class UpdateNotesActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Notes Updated Successfully!!", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.delete_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.delete_icon) {
+            BottomSheetDialog dialog = new BottomSheetDialog(UpdateNotesActivity.this, R.style.BottomSheetStyle);
+
+            View view = LayoutInflater.from(UpdateNotesActivity.this)
+                    .inflate(R.layout.delete_confirmation_dialog, (LinearLayout) findViewById(R.id.bottomSheet));
+
+            dialog.setContentView(view);
+
+            TextView yes_btn, no_btn;
+            yes_btn = view.findViewById(R.id.yes_delete);
+            no_btn = view.findViewById(R.id.no_delete);
+
+            yes_btn.setOnClickListener(v -> {
+                notesViewModel.deleteNote(mId);
+                finish();
+            });
+
+            no_btn.setOnClickListener(v -> {
+                dialog.dismiss();
+            });
+            dialog.show();
+        }
+        return true;
     }
 }
