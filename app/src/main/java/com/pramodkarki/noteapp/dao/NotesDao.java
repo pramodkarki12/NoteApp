@@ -1,5 +1,6 @@
 package com.pramodkarki.noteapp.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface NotesDao {
 
     @Query("SELECT * FROM notes_dB ")
-    List<NotesEntity> getAllNotes();
+    LiveData<List<NotesEntity>> getAllNotes();
 
     @Insert
     void insertNotes(NotesEntity... notes);
