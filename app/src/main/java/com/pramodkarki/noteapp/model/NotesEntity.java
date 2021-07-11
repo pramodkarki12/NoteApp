@@ -1,4 +1,4 @@
-package com.pramodkarki.noteapp;
+package com.pramodkarki.noteapp.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

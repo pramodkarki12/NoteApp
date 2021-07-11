@@ -1,10 +1,13 @@
-package com.pramodkarki.noteapp;
+package com.pramodkarki.noteapp.database;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.pramodkarki.noteapp.model.NotesEntity;
+import com.pramodkarki.noteapp.dao.NotesDao;
 
 @Database(entities = {NotesEntity.class}, version = 1)
 public abstract class NotesDatabase extends RoomDatabase {

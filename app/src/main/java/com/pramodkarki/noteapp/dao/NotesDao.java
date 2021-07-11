@@ -1,8 +1,10 @@
-package com.pramodkarki.noteapp;
+package com.pramodkarki.noteapp.dao;
 
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.pramodkarki.noteapp.model.NotesEntity;
 
 import java.util.List;
 
