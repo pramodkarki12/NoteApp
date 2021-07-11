@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/title"
+            android:id="@+id/updateTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -26,7 +26,7 @@
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/subtitle"
+            android:id="@+id/updateSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -57,19 +57,21 @@
                 android:fontFamily="@font/product_sans_regular"/>
 
             <ImageView
+                android:id="@+id/greenPriority"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/green_shape"
-                android:src="@drawable/ic_baseline_check" />
+                android:background="@drawable/green_shape" />
 
             <ImageView
+                android:id="@+id/yellowPriority"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/yellow_shape" />
 
             <ImageView
+                android:id="@+id/redPriority"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="8dp"
@@ -77,7 +79,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/notes"
+            android:id="@+id/updateNotes"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginLeft="16dp"

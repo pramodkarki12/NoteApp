@@ -61,8 +61,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/green_shape"
-                android:src="@drawable/ic_baseline_check" />
+                android:background="@drawable/green_shape" />
 
             <ImageView
                 android:id="@+id/yellowPriority"
